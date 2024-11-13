@@ -1,3 +1,3 @@
 <?php 
-$connect = mysqli_connect("localhost", "root", "", "2401e1project")
+$connect = mysqli_connect("localhost", "root", "", "php_project")
 ?>
