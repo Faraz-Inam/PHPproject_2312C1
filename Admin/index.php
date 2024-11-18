@@ -1,5 +1,19 @@
 <?php 
  include("header.php");
+ include("connection.php");
+
+ $count_cat = "SELECT COUNT(*) as c FROM categories";
+ $count_q = mysqli_query($connect, $count_cat);
+ $fetch_cat = mysqli_fetch_assoc($count_q);
+
+ $count_brand = "SELECT COUNT(*) as b FROM brands";
+ $count_q = mysqli_query($connect, $count_brand);
+ $fetch_brand = mysqli_fetch_assoc($count_q);
+
+ $count_pr = "SELECT COUNT(*) as p FROM products";
+ $count_q = mysqli_query($connect, $count_pr);
+ $fetch_pr = mysqli_fetch_assoc($count_q);
+
     ?>
 
             <!-- Sale & Revenue Start -->
@@ -9,8 +23,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Categories Count</p>
+                                <h6 class="mb-0"><?php echo $fetch_cat['c'] ?></h6>
                             </div>
                         </div>
                     </div>
@@ -18,8 +32,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Brands Count</p>
+                                <h6 class="mb-0"><?php echo $fetch_brand['b'] ?></h6>
                             </div>
                         </div>
                     </div>
@@ -27,8 +41,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Products Count</p>
+                                <h6 class="mb-0"><?php echo $fetch_pr['p'] ?></h6>
                             </div>
                         </div>
                     </div>
@@ -36,7 +50,7 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
+                                <p class="mb-2">Total Order</p>
                                 <h6 class="mb-0">$1234</h6>
                             </div>
                         </div>
