@@ -1,5 +1,5 @@
 <?php 
-include 'connection.php';
+include("../Admin/connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +61,7 @@ if(isset($_POST['logInBtn'])){
 
     $regd = "INSERT INTO `users`(`first_name`, `last_name`, `gender`, `date_of_birth`, `username`, `email`, `password`, `role_id`)
     VALUES ('$fname','$lname','$gender','$dob','$username','$email','$password','$roleId')";
-    $done = mysqli_query($conn, $regd);
+    $done = mysqli_query($connect, $regd);
 
     if($done){
         echo "<script>

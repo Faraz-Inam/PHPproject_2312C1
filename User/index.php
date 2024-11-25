@@ -1,6 +1,6 @@
 <?php 
 include("header.php");
-include("Admin/connection.php");
+include("../Admin/connection.php");
 
 $products = "SELECT * FROM `products`";
 $query = mysqli_query($connect, $products);

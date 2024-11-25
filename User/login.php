@@ -1,9 +1,9 @@
 <?php 
-include 'connection.php';
+include("../Admin/connection.php");
 session_start();
 
-if(isset($_SESSION['user'])){
-    header('location: userHome.php');
+if(isset($_SESSION['username'])){
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -19,12 +19,15 @@ if(isset($_SESSION['user'])){
         <label for="">Username</label>
         <input type="text" class="form-control" name="u_name">
         <label for="">Password</label>
-        <input type="password"class="form-control" name="pass">
+        <input type="password"class="form-control" name="pass" id="sp">
+        <input type="checkbox" name="" id="" onclick="showPass()">
         <button type="submit" name="login_btn" class="btn btn-primary m-2">Log In</button>
         Did not signed in yet? <a href="signup.php">Sign Up!</a>
     </form>
 </body>
 </html>
+
+
 
 <?php 
 if(isset($_POST['login_btn'])){
@@ -32,21 +35,40 @@ if(isset($_POST['login_btn'])){
     $pw = $_POST['pass'];
 
     $auth = "SELECT * FROM users WHERE username = '$username' AND password = '$pw'";
-    $query =  mysqli_query($conn, $auth);
+    $query =  mysqli_query($connect, $auth);
     $row_count = mysqli_num_rows($query);
+    $fetch = mysqli_fetch_assoc($query);
 
 
 
     // echo $row_count;
 
     if($row_count == 1){
-        $_SESSION['user'] = $username;
-        $_SESSION['start_time'] = time();
+        $_SESSION['username'] = $fetch['username'];
+        $_SESSION['userrole'] = $fetch['role_id'];
+        // $_SESSION['start_time'] = time();
         // echo "<script> window.location.href = 'userHome.php'</script>";
-        header("location: userHome.php");
+        if($fetch['role_id'] == 1){
+            header("location: ../Admin/index.php");
+        }
+        else{
+            header("location: index.php");
+        }
     }
     else{
         echo "<p style='color: red;'> Username OR Pasword is Incorrect </p>";
     }
 }
 ?>
+
+<script>
+    function showPass(){
+       var sp = document.getElementById("sp");
+    if(sp.type == "password"){
+        sp.type = "text";
+    }
+    else{
+        sp.type = "password";
+    }
+    }
+</script>

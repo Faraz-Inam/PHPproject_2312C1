@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+if($_SESSION['userrole'] == 2){
+    header("location: ../User/index.php");
+}
+
+if(!isset($_SESSION['username'])){
+    header("location: ../User/login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -189,7 +200,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="../User/logout.php" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>

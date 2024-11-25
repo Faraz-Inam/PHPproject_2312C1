@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+if($_SESSION['userrole'] == 1){
+    header("location: ../Admin/index.php");
+}
+
+if(!isset($_SESSION['username'])){
+    header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,10 +94,10 @@
                         <small class="fa fa-search text-body"></small>
                     </a>
                     <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
-                        <small class="fa fa-user text-body"></small>
-                    </a>
-                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
                         <small class="fa fa-shopping-bag text-body"></small>
+                    </a>
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="logout.php">
+                        <small class="fa fa-user text-body"></small>
                     </a>
                 </div>
             </div>
