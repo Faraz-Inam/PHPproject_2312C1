@@ -34,15 +34,15 @@ if(isset($_POST['login_btn'])){
     $username = $_POST['u_name'];
     $pw = $_POST['pass'];
 
-    $auth = "SELECT * FROM users WHERE username = '$username' AND password = '$pw'";
+    $auth = "SELECT * FROM users WHERE username = '$username'";
     $query =  mysqli_query($connect, $auth);
     $row_count = mysqli_num_rows($query);
     $fetch = mysqli_fetch_assoc($query);
-
+    $encryptedPass = $fetch['password'];
 
 
     // echo $row_count;
-
+    if(password_verify($pw, $encryptedPass)){
     if($row_count == 1){
         $_SESSION['username'] = $fetch['username'];
         $_SESSION['userrole'] = $fetch['role_id'];
@@ -58,6 +58,8 @@ if(isset($_POST['login_btn'])){
     else{
         echo "<p style='color: red;'> Username OR Pasword is Incorrect </p>";
     }
+}
+
 }
 ?>
 

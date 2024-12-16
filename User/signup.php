@@ -43,13 +43,13 @@ include("../Admin/connection.php");
 <label for="">Confirm Password</label>
 <input type="password" class="form-control" name="c_password" id="c_pass" required>
 
-<button type="submit" class="btn btn-info m-2" name="logInBtn" onclick="return verify_pass()">Sign Up</button>
+<button type="submit" class="btn btn-info m-2" name="signUpBtn">Sign Up</button>
 </form>
 </body>
 </html>
 
 <?php 
-if(isset($_POST['logInBtn'])){
+if(isset($_POST['signUpBtn'])){
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $dob = $_POST['dob'];
@@ -57,17 +57,29 @@ if(isset($_POST['logInBtn'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $encryptedPassword = password_hash($password, PASSWORD_BCRYPT);
     $roleId = 2;
 
-    $regd = "INSERT INTO `users`(`first_name`, `last_name`, `gender`, `date_of_birth`, `username`, `email`, `password`, `role_id`)
-    VALUES ('$fname','$lname','$gender','$dob','$username','$email','$password','$roleId')";
-    $done = mysqli_query($connect, $regd);
+    $sel = "SELECT * FROM users WHERE username = '$username'";
+    $q = mysqli_query($connect, $sel);
+    $row_count = mysqli_num_rows($q);
 
-    if($done){
-        echo "<script>
-        alert('Registered Successfully');
-        window.location.href = 'login.php';
-        </script>";
+    if($row_count > 0){ ?>
+        <div class="alert alert-danger" role="alert">
+        Username already Taken
+        </div>
+    <?php }
+    else{
+        $insert = "INSERT INTO `users` (`firstname`, `lastname`, `gender`, `date_of_birth`, `username`, `email`, `password`, `role_id`)
+        VALUES ('$fname', '$lname', '$gender', '$dob', '$username', '$email', '$encryptedPassword', '$role_id')";
+        $q = mysqli_query($connect, $insert);
+    
+        if($q){
+            echo "<script>
+            alert('account created');
+            window.location.href = 'login.php';
+            </script>";
+        }
     }
 }
 ?>
