@@ -8,6 +8,8 @@ if($_SESSION['userrole'] == 1){
 if(!isset($_SESSION['username'])){
     header("location: login.php");
 }
+
+$currentPage = basename($_SERVER['PHP_SELF']);  // to get current page
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,11 +77,11 @@ if(!isset($_SESSION['username'])){
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About Us</a>
-                    <a href="products.php" class="nav-item nav-link">Products</a>
+                    <a href="index.php" class="nav-item nav-link <?php echo $currentPage == 'index.php' ? 'active' : ''; ?>">Home</a>
+                    <a href="about.php" class="nav-item nav-link <?php echo $currentPage == 'about.php' ? 'active' : ''; ?>">About Us</a>
+                    <a href="products.php" class="nav-item nav-link <?php echo $currentPage == 'products.php' ? 'active' : ''; ?>">Products</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
+                        <a href="#" class="nav-link dropdown-toggle <?php echo $currentPage == 'categories.php' ? 'active' : ''; ?>" data-bs-toggle="dropdown">Categories</a>
                         <div class="dropdown-menu m-0">
                             <a href="mobiles.php" class="dropdown-item">Mobile</a>
                             <a href="laptops.php" class="dropdown-item">Laptop</a>
@@ -87,7 +89,7 @@ if(!isset($_SESSION['username'])){
                             <a href="others.php" class="dropdown-item">others</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                    <a href="contact.php" class="nav-item nav-link <?php echo $currentPage == 'contact.php' ? 'active' : ''; ?>">Contact Us</a>
                 </div>
                 <div class="d-none d-lg-flex ms-2">
                     <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
